@@ -1,0 +1,435 @@
+CREATE TABLE Ticket (    TICKET_ID CHAR(20) PRIMARY KEY,    BOOKING_ID CHAR(20) NOT NULL,    SEAT_NUMBER CHAR(20) NOT NULL,    PRICE NUMBER(10,2) NOT NULL,    TICKET_TYPE CHAR(20) NOT NULL    )'
+  2  J;
+CREATE TABLE Ticket (    TICKET_ID CHAR(20) PRIMARY KEY,    BOOKING_ID CHAR(20) NOT NULL,    SEAT_NUMBER CHAR(20) NOT NULL,    PRICE NUMBER(10,2) NOT NULL,    TICKET_TYPE CHAR(20) NOT NULL    )'
+                                                                                                                                                                                                 *
+ERROR at line 1:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Ticket (
+  2  TICKET_ID CHAR(5) PRIMARY KEY,    
+  3  BOOKING_ID CHAR(20) NOT NULL,    
+  4  SEAT_NUMBER CHAR(5) NOT NULL,    
+  5  PRICE NUMBER(10,2) NOT NULL,    
+  6  TICKET_TYPE CHAR(20) NOT NULL),
+  7  CONSTRAINTS FK123 FORIGN KEY(BOOKING_ID) REFERENCES BOOKING(BOOKING_ID),
+  8  CONSTRAINTS CSK125 CHECK(SUBSTR(TICKET_ID,1,1) = T),
+  9  CONSTRAINTS CSK126 CHECK(SUBSTR(TICKET_ID,2) NOT IN ('%A-Z%')),
+ 10* CONSTRAINTS CSK125 CHECK(SEAT_NUMBER LIKE '[A-Z]%[0-9]%')
+ 11  /
+TICKET_TYPE CHAR(20) NOT NULL),
+                              *
+ERROR at line 6:
+ORA-00922: missing or invalid option 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Ticket (
+  2  TICKET_ID CHAR(5) PRIMARY KEY,    
+  3  BOOKING_ID CHAR(20) NOT NULL,    
+  4  SEAT_NUMBER CHAR(5) NOT NULL,    
+  5  PRICE NUMBER(10,2) NOT NULL,    
+  6  TICKET_TYPE CHAR(20) NOT NULL,
+  7  CONSTRAINTS FK123 FORIGN KEY(BOOKING_ID) REFERENCES BOOKING(BOOKING_ID),
+  8  CONSTRAINTS CSK125 CHECK(SUBSTR(TICKET_ID,1,1) = T),
+  9  CONSTRAINTS CSK126 CHECK(SUBSTR(TICKET_ID,2) NOT IN ('%A-Z%')),
+ 10  CONSTRAINTS CSK125 CHECK(SEAT_NUMBER LIKE '[A-Z]%[0-9]%'
+ 11  )
+ 12  /
+ 13* S
+SQL> /
+CONSTRAINTS FK123 FORIGN KEY(BOOKING_ID) REFERENCES BOOKING(BOOKING_ID),
+                            *
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Ticket (
+  2  TICKET_ID CHAR(5) PRIMARY KEY,    
+  3  BOOKING_ID CHAR(20) NOT NULL,    
+  4  SEAT_NUMBER CHAR(5) NOT NULL,    
+  5  PRICE NUMBER(10,2) NOT NULL,    
+  6  TICKET_TYPE CHAR(20) NOT NULL,
+  7  CONSTRAINTS FK123 FORIGN KEY((BOOKING_ID) REFERENCES BOOKING(BOOKING_ID)),
+  8  CONSTRAINTS CSK125 CHECK(SUBSTR(TICKET_ID,1,1) = T),
+  9  CONSTRAINTS CSK126 CHECK(SUBSTR(TICKET_ID,2) NOT IN ('%A-Z%')),
+ 10  CONSTRAINTS CSK125 CHECK(SEAT_NUMBER LIKE '[A-Z]%[0-9]%'
+ 11  )
+ 12  /
+ 13* S
+SQL> /
+CONSTRAINTS FK123 FORIGN KEY((BOOKING_ID) REFERENCES BOOKING(BOOKING_ID)),
+                            *
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Ticket (
+  2  TICKET_ID CHAR(5) PRIMARY KEY,    
+  3  BOOKING_ID CHAR(20) NOT NULL,    
+  4  SEAT_NUMBER CHAR(5) NOT NULL,    
+  5  PRICE NUMBER(10,2) NOT NULL,    
+  6  TICKET_TYPE CHAR(20) NOT NULL,
+  7  CONSTRAINTS FK123 FORIGN KEY((BOOKING_ID) REFERENCES BOOKING(BOOKING_ID)),
+  8  CONSTRAINTS CSK125 CHECK(SUBSTR(TICKET_ID,1,1) = T),
+  9  CONSTRAINTS CSK126 CHECK(SUBSTR(TICKET_ID,2) NOT IN ('%A-Z%')),
+ 10  CONSTRAINTS CSK125 CHECK(SEAT_NUMBER LIKE '[A-Z]%[0-9]%'
+ 11* )
+ 12  /
+CONSTRAINTS FK123 FORIGN KEY((BOOKING_ID) REFERENCES BOOKING(BOOKING_ID)),
+                            *
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Ticket (
+  2  TICKET_ID CHAR(5) PRIMARY KEY,    
+  3  BOOKING_ID CHAR(20) NOT NULL,    
+  4  SEAT_NUMBER CHAR(5) NOT NULL,    
+  5  PRICE NUMBER(10,2) NOT NULL,    
+  6  TICKET_TYPE CHAR(20) NOT NULL,
+  7  CONSTRAINTS FK123 FORIGN KEY(BOOKING_ID) REFERENCES BOOKING(BOOKING_ID),
+  8  CONSTRAINTS CSK125 CHECK(SUBSTR(TICKET_ID,1,1) = T),
+  9  CONSTRAINTS CSK126 CHECK(SUBSTR(TICKET_ID,2) NOT IN ('%A-Z%')),
+ 10  CONSTRAINTS CSK125 CHECK(SEAT_NUMBER LIKE '[A-Z]%[0-9]%'
+ 11* )
+SQL> CL SCR
+SQL> CREATE TABLE TICKETTICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE);
+CREATE TABLE TICKETTICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE)
+                           *
+ERROR at line 1:
+ORA-02263: need to specify the datatype for this column 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Ticket (
+  2      TICKET_ID CHAR(5) PRIMARY KEY,
+  3      BOOKING_ID CHAR(20) NOT NULL,
+  4      SEAT_NUMBER CHAR(5) NOT NULL,
+  5      PRICE NUMBER(10,2) NOT NULL,
+  6      TICKET_TYPE CHAR(20) NOT NULL    
+  7* )
+SQL> /
+
+Table created.
+
+SQL> COMMIT
+  2  COMMIT;
+COMMIT
+*
+ERROR at line 2:
+ORA-02185: a token other than WORK follows COMMIT 
+
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM TICKET;
+
+no rows selected
+
+SQL> DESC TICKET;
+ Name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ TICKET_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         NOT NULL CHAR(5)
+ BOOKING_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        NOT NULL CHAR(20)
+ SEAT_NUMBER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NOT NULL CHAR(5)
+ PRICE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             NOT NULL NUMBER(10,2)
+ TICKET_TYPE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NOT NULL CHAR(20)
+
+SQL> INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD'),
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD'),
+  4  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD'),
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP'),
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP'),
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+  8  SELECT * FROM DUAL
+  9  ;
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+                                                                                                                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD'),
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD'),
+  4  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD'),
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP'),
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP'),
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+  8* SELECT * FROM DUAL
+  9  ED
+ 10  ;
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+                                                                                                                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD'),
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD'),
+  4  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD'),
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP'),
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP'),
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+  8  SELECT * FROM DUAL
+  9* ED
+ 10  /
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+                                                                                                                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1   INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD')
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD')
+  4  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD')
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP')
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP')
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+  8* SELECT * FROM DUAL
+  9  /
+
+7 rows created.
+
+SQL> 
+SQL> INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+  2  ;
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD'),
+                                                                                                                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T101','B101','A101',950.00,'STANDARD')
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T102','B102','A102',1000.00,'STANDARD')
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T103','B103','B204',3500.00,'VIP')
+  4* SELECT * FROM DUAL
+  5  /
+
+3 rows created.
+
+SQL> SELECT * FROM TICKET;
+
+TICKE BOOKING_ID           SEAT_      PRICE TICKET_TYPE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+----- -------------------- ----- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+T104  B104                 C301         950 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T105  B105                 C301        1050 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T106  B106                 C302         800 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T107  B107                 C303        1550 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T108  B108                 A103        5000 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T109  B109                 D401        4500 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T110  B110                 D402        6000 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T101  B101                 A101         950 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T102  B102                 A102        1000 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T103  B103                 B204        3500 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1* SELECT * FROM TICKET
+SQL> DROP TABLE TICKET;
+
+Table dropped.
+
+SQL> CL SCR;
+SQL> 
+SQL> 
+SQL> REATE TABLE Ticket (    TICKET_ID CHAR(20) PRIMARY KEY,    BOOKING_ID CHAR(20) NOT NULL,    SEAT_NUMBER CHAR(20) NOT NULL,    PRICE NUMBER(10,2) NOT NULL,    TICKET_TYPE CHAR(20) NOT NULL    );
+SP2-0734: unknown command beginning "REATE TABL..." - rest of line ignored.
+SQL> ED
+Wrote file afiedt.buf
+
+  1* DROP TABLE TICKET
+SQL> 
+SQL> CREATE TABLE REATE TABLE Ticket (    TICKET_ID CHAR(20) PRIMARY KEY,    BOOKING_ID CHAR(20) NOT NULL,    SEAT_NUMBER CHAR(20) NOT NULL,    PRICE NUMBER(10,2) NOT NULL,    TICKET_TYPE CHAR(20) NOT NULL    );
+CREATE TABLE REATE TABLE Ticket (    TICKET_ID CHAR(20) PRIMARY KEY,    BOOKING_ID CHAR(20) NOT NULL,    SEAT_NUMBER CHAR(20) NOT NULL,    PRICE NUMBER(10,2) NOT NULL,    TICKET_TYPE CHAR(20) NOT NULL    )
+                   *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE  TABLE Ticket (    
+  2  TICKET_ID CHAR(5) PRIMARY KEY,  
+  3  BOOKING_ID CHAR(5) NOT NULL,    
+  4  SEAT_NUMBER CHAR(20) NOT NULL,   
+  5  PRICE NUMBER(10,2) NOT NULL,    
+  6  TICKET_TYPE CHAR(20) NOT NULL    
+  7* )
+SQL> /
+
+Table created.
+
+SQL> INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T101','B101', 'A101', 850.00,'STANDARD')
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T102','B102','A102', 1000.00, 'STANDARD')
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T103','B103','B204',3500.00, 'VIP')
+  4  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD'),
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD'),
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD'),
+  8  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP'),
+  9  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP'),
+ 10  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+ 11  SELECT * FROM DUAL;
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+*
+ERROR at line 4:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T101','B101', 'A101', 850.00,'STANDARD')
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T102','B102','A102', 1000.00, 'STANDARD')
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T103','B103','B204',3500.00, 'VIP')
+  4  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD'),
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD'),
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD'),
+  8  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP'),
+  9  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP'),
+ 10  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+ 11* SELECT * FROM DUAL
+SQL> /
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+*
+ERROR at line 4:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T101','B101', 'A101', 850.00,'STANDARD')
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T102','B102','A102', 1000.00, 'STANDARD')
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T103','B103','B204',3500.00, 'VIP')
+  4  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD')
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD')
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD')
+  8  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP')
+  9  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP')
+ 10  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+ 11* SELECT * FROM DUAL
+ 12  /
+INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+*
+ERROR at line 4:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  INSERT ALL INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T101','B101', 'A101', 850.00,'STANDARD')
+  2  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T102','B102','A102', 1000.00, 'STANDARD')
+  3  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T103','B103','B204',3500.00, 'VIP')
+  4  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T104','B104','C301',950.00,'STANDARD')
+  5  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T105','B105','C301',1050.00,'STANDARD')
+  6  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T106','B106','C302',800.00,'STANDARD')
+  7  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T107','B107','C303',1550.00,'STANDARD')
+  8  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T108','B108','A103',5000.00,'VIP')
+  9  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T109','B109','D401',4500.00,'VIP')
+ 10  INTO TICKET (TICKET_ID,BOOKING_ID,SEAT_NUMBER,PRICE,TICKET_TYPE) VALUES('T110','B110','D402',6000.00,'VIP')
+ 11* SELECT * FROM DUAL
+SQL> /
+
+10 rows created.
+
+SQL> SELECT * FROM TICKET
+  2  ;
+
+TICKE BOOKI SEAT_NUMBER               PRICE TICKET_TYPE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+----- ----- -------------------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+T101  B101  A101                        850 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T102  B102  A102                       1000 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T103  B103  B204                       3500 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T104  B104  C301                        950 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T105  B105  C301                       1050 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T106  B106  C302                        800 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T107  B107  C303                       1550 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T108  B108  A103                       5000 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T109  B109  D401                       4500 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T110  B110  D402                       6000 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> edit
+Wrote file afiedt.buf
+
+  1* SELECT * FROM TICKET
+  2  ED
+  3  ;
+
+TICKE BOOKI SEAT_NUMBER               PRICE TICKET_TYPE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+----- ----- -------------------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+T101  B101  A101                        850 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T102  B102  A102                       1000 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T103  B103  B204                       3500 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T104  B104  C301                        950 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T105  B105  C301                       1050 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T106  B106  C302                        800 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T107  B107  C303                       1550 STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+T108  B108  A103                       5000 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T109  B109  D401                       4500 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+T110  B110  D402                       6000 VIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT * FROM TICKET
+  2* ED
+  3  COMMIT;
+COMMIT
+*
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM TICKET;
+
